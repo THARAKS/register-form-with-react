@@ -1,0 +1,41 @@
+{
+  "name": "register-form-with-react",
+  "version": "1.0.0",
+  "description": "A simple register form using react components",
+  "main": "index.js",
+  "scripts": {
+    "start": "  webpack -w --mode development",
+    "prod": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/THARAKS/register-form-with-react.git"
+  },
+  "keywords": [
+    "reactregisterform"
+  ],
+  "author": "Thara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/THARAKS/register-form-with-react/issues"
+  },
+  "homepage": "https://github.com/THARAKS/register-form-with-react#readme",
+  "dependencies": {
+    "husky": "^0.14.3",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  }
+}
