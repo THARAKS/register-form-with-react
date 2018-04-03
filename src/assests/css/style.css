@@ -3,23 +3,32 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+  html{
+    overflow: hidden;
+  }
+
   body {
     font-family: 'Nunito', sans-serif;
     color: #384047;
+    overflow: hidden;
   }
-  
+  p{
+    font-family: sans-serif;
+    font-style: unset;
+    font-size: 14px;
+    text-align: center;
+  }
   form {
     max-width: 300px;
     margin: 10px auto;
     padding: 10px 20px;
     background: #f4f7f8;
-    border-radius: 8px;
+    border-radius: 26px;
 
   }
   
   h1 {
-    margin: 0 0 30px 0;
+    margin: 26px 0 30px 0;
     text-align: center;
   }
   
@@ -48,7 +57,7 @@
   
   
   button {
-    padding: 19px 39px 18px 39px;
+    padding: 16PX;
     color: black;
     background-color:rgb(255, 242, 59) ;
     font-size: 18px;
@@ -56,10 +65,10 @@
     font-style: normal;
     border-radius: 5px;
     width: 100%;
-    border: 1px solid rgb(255, 242, 59);
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
     margin-bottom: 10px;
+    cursor: pointer;
   }
   
   fieldset {
@@ -103,8 +112,8 @@
 } */
 button:disabled,
 button[disabled]{
-  color: #666666;
   cursor: not-allowed;
+  background-color: gainsboro;
 
 }
 
@@ -114,6 +123,28 @@ form input.error {
   float:right; */
 }
 
+
+.custumBack
+{
+  background: url(images/bg1.jpg) no-repeat;
+  width: 100%;
+  height:auto;
+  background-size: cover;
+
+}
+input {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+}
+ 
+input:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+ 
+  border: 1px solid rgba(81, 203, 238, 1);
+}
 .errorMessage
 {
   width: 80%;

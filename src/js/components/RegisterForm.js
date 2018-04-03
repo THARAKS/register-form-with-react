@@ -108,7 +108,7 @@ class RegisterForm extends Component {
       }
   render() {
     return (
-      <div>
+      <div >
         <form name="registerForm" onSubmit={this.handleSubmit}>
           <h1>Register</h1>
           <p>Join the community and improve your game with <b> ANGULAR </b></p>
@@ -138,7 +138,7 @@ class RegisterForm extends Component {
             </div>
             <div className="input-container">
 			      <i className="fa fa-map-marker iconPos"></i>
-            <input type="password"
+            <input type="text"
              id="zipCode"
             name="zipCode"
             placeholder="Zip Code"
