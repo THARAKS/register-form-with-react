@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import {ErrorFile} from "./ErrorFile"
-const divStyle = {
-  border: '1 px solid red'
-};
+
+
 class RegisterForm extends Component {
     constructor () {
         super();
@@ -14,97 +13,73 @@ class RegisterForm extends Component {
           userName:'',
           password: '',
           confirmPassword:'',
-          formErrors: {email:'', userName: '', password: '', confirmPassword:''},
-          emailValid: false,
-          userNameValid:false,
-          passwordValid: false,
-          cnfpwdValid:false,
+          formErrors: {email:true, userName: true, password: true, confirmPassword:true},
+          emailValid: null,
+          userNameValid:null,
+          passwordValid: null,
+          cnfpwdValid:null,
           valid: false
+         
         }
       }
     
-     
-
       handleUserInput = (event) =>{
-          var name = event.target.name;
-          var value = event.target.value;
-          console.log(event)
-          this.setState({[name]:value},
-            () => {this.validateField(name, value)})
+          var inputName = event.target.name;
+          var inputValue = event.target.value;
+          this.setState({[inputName]:inputValue},
+            () => {this.validateField(inputName, inputValue)})
         
       }
-      
-     
-
-      validateField(fieldName, value) {
+       isEmailValid(emailAdress) {
+        var EMAIL_REGEXP = new RegExp('^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$', 'i');
+        return EMAIL_REGEXP.test(emailAdress)
+    }
+    isValidUserName=(name)=>(name.match(/^([a-z][A-Z]+)$/i)?true:false);
+   
+    isValidPassword=(password)=>(password.match( /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/)?true:false)
+   
+      validateField(inputName, inputValue) {
         let fieldValidationErrors = this.state.formErrors;
-        let formErrorsCss=this.state.formErrorsCss;
         let emailValid = this.state.emailValid;
         let userNameValid = this.state.userNameValid;
         let passwordValid = this.state.passwordValid;
         let cnfpwdValid = this.state.cnfpwdValid;
 
-        var cp;
-
-        switch(fieldName) {
+       switch(inputName) {
           
             case 'email':
-            emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-            
+            emailValid = this.isEmailValid(inputValue);
             fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-            if(!emailValid)
-            {
-              document.getElementById('email').style.borderColor = "red";
-
-            }
-            else{
-              document.getElementById('email').style.borderColor = "blue";
-              emailValid=true;
-            }
-
+          
             break;
             case 'userName':
-            userNameValid= value.match(/^([a-z][A-Z]+)$/i);
+            userNameValid=this.isValidUserName(inputValue)
             fieldValidationErrors.userName = userNameValid ? '' : ' is invalid';
-            if(!userNameValid)
-            {
-              document.getElementById('userName').style.borderColor = "red";
-
-            }
-            else{
-              document.getElementById('userName').style.borderColor = "blue";
-              userNameValid=true;
-
-            }
+            
             break;
           case 'password':
-            passwordValid = value.length >= 6;
-            
-            fieldValidationErrors.password = passwordValid ? '': ' is too short';
-            if( value===null || value =='' || !passwordValid)
+            passwordValid =this.isValidPassword(inputValue)
+            if(passwordValid)
             {
-              document.getElementById('password').style.borderColor = "red";
-
+              fieldValidationErrors.password=passwordValid
+              passwordValid=true
             }
-            else{
-              cp=value;
-              document.getElementById('password').style.borderColor = "blue";
-
+            else
+            {
+              fieldValidationErrors.password = 'Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit ';
+              passwordValid=false;
             }
-            break;
+           
+          break;
           case 'confirmPassword':
           if(this.state.confirmPassword ===  this.state.password)
           {
-          //  cnfpwdValid=true;
-            document.getElementById('confirmPassword').style.borderColor = "blue";
-            fieldValidationErrors.confirmPassword =  '';
-
-
+          fieldValidationErrors.confirmPassword =  '';
+          cnfpwdValid=true;
           }
           else{
-            document.getElementById('confirmPassword').style.borderColor = "red";
             fieldValidationErrors.confirmPassword =  ' is not match';
-
+            cnfpwdValid=false;
           }
           
             break;
@@ -112,8 +87,8 @@ class RegisterForm extends Component {
             break;
         }
         this.setState({formErrors: fieldValidationErrors,
-                        emailValid: this.state.emailValid,
-                        userNameValid: this.state.userNameValid,
+                        emailValid: emailValid,
+                        userNameValid: userNameValid,
                         passwordValid: passwordValid,
                         cnfpwdValid: cnfpwdValid
 
@@ -122,13 +97,11 @@ class RegisterForm extends Component {
                       
       }
       validateForm() {
-        var x=this.state.emailValid || this.state.userNameValid ||  this.state.passwordValid || this.state.cnfpwdValid
+        var x=this.state.emailValid && this.state.userNameValid && this.state.passwordValid && this.state.cnfpwdValid
         this.setState({ valid : x });
       }
     
-      errorClass(error) {
-        return(error.length === 0 ? '' : 'has-error');
-      }
+      
       handleSubmit= ()=>{
         alert('Sucessfully registered')
 
@@ -143,17 +116,17 @@ class RegisterForm extends Component {
           <fieldset>
           <div className="input-container">
 		    	<i className="fa fa-user iconPos"></i>
-            <input type="text" 
-            placeholder="First Name"
-            id="name" name="firstName"
-             ref="firstName"
-             value={this.state.firstName}
-             onChange={this.handleUserInput}
-             />
+          <input type="text" 
+          placeholder="First Name"
+          id="name" name="firstName"
+          ref="firstName"
+          value={this.state.firstName}
+          onChange={this.handleUserInput}
+          />
             </div>
 
             <div className="input-container">
-			       <i className="fa fa-user iconPos"></i>
+			      <i className="fa fa-user iconPos"></i>
             <input type="text" id="lastName" 
             name="lastName" 
             placeholder="Last Name"
@@ -175,40 +148,47 @@ class RegisterForm extends Component {
                />
             </div>
             <div className="input-container">
-			<i className="fa fa-envelope iconPos"></i>
+			      <i className="fa fa-envelope iconPos"></i>
             <input type="email" id="email"
              name="email" placeholder="Email"
              ref="email" value={this.state.email}
              onChange={this.handleUserInput} required
+             className={(this.state.emailValid!==null &&!this.state.emailValid )? "error" : ""}
+
              />
             </div>
             <div className="input-container">
-			<i className="fa fa-user iconPos"></i>
+		      	<i className="fa fa-user iconPos"></i>
             <input type="text" id="userName"
              name="userName" placeholder="UserName"
              ref="userName" value={this.state.userName} 
              onChange={this.handleUserInput} required
+            className={(this.state.userNameValid!==null&&!this.state.userNameValid)? "error" : ""}
+
                           />
             </div>
             <div className="input-container">
-			<i className="fa fa-unlock iconPos"></i>
+		      	<i className="fa fa-unlock iconPos"></i>
             <input type="password" id="password" 
             name="password" placeholder="Password"
             ref="password" value={this.state.password}
             onChange={this.handleUserInput} required
+            className={(this.state.passwordValid!==null && !this.state.passwordValid)? "error" : ""}
+
             />
             </div>
             <div className="input-container">
-			<i className="fa fa-lock iconPos"></i>
+            <i className="fa fa-lock iconPos"></i>
             <input type="password" id="confirmPassword"
              name="confirmPassword" placeholder="Confirm Password"
              ref="confirmPassword" value={this.state.confirmPassword}
              onChange={this.handleUserInput} required
-             />
+             className={(this.state.cnfpwdValid!==null && !this.state.cnfpwdValid)? "error" : ""}
+            />
             </div>
           </fieldset>
           <p>By registering you agree to our terms and privacy policy</p>
-          <div className="error">
+          <div >
           <ErrorFile formErrors={this.state.formErrors}  />
           </div>
           <button type="submit" disabled={!this.state.valid}>Sign Up</button>

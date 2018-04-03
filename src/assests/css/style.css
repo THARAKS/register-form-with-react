@@ -15,6 +15,7 @@
     padding: 10px 20px;
     background: #f4f7f8;
     border-radius: 8px;
+
   }
   
   h1 {
@@ -24,19 +25,13 @@
   
   input[type="text"],
   input[type="password"],
-  input[type="date"],
-  input[type="datetime"],
   input[type="email"],
   input[type="number"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="time"],
-  input[type="url"],
+ 
   textarea,
   select {
-    border: none;
     font-size: 16px;
-    height: auto;
+    height: 20px;
     margin: 0;
     outline: 0;
     padding: 15px;
@@ -48,16 +43,9 @@
     padding-left: 50px;
   }
   
-  input[type="radio"],
-  input[type="checkbox"] {
-    margin: 0 4px 8px 0;
-  }
+ 
   
-  select {
-    padding: 6px;
-    height: 32px;
-    border-radius: 2px;
-  }
+  
   
   button {
     padding: 19px 39px 18px 39px;
@@ -94,19 +82,7 @@
     display: inline;
   }
   
-  .number {
-    background-color: #5fcf80;
-    color: #fff;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    font-size: 0.8em;
-    margin-right: 4px;
-    line-height: 30px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-    border-radius: 100%;
-  }
+
   
   @media screen and (min-width: 480px) {
   
@@ -118,13 +94,10 @@
 
   .iconPos{
     position: relative;
-    top: 34px;
+    top: 26px;
     left: 10px;
   }
-  .error{
-      background-color: red;
-      color:white;
-  }
+ 
   /* input:invalid {
     border:1px solid  red;
 } */
@@ -132,4 +105,18 @@ button:disabled,
 button[disabled]{
   color: #666666;
   cursor: not-allowed;
+
+}
+
+form input.error {
+  border-color: red;
+  /* background: url(/cssimages/comment-author.gif) no-repeat scroll 7px 7px;
+  float:right; */
+}
+
+.errorMessage
+{
+  width: 80%;
+    background-color: red;
+    color: white;
 }
