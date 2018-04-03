@@ -54,7 +54,7 @@ class RegisterForm extends Component {
             break;
             case 'userName':
             userNameValid=this.isValidUserName(inputValue)
-            fieldValidationErrors.userName = userNameValid ? '' : ' is invalid';
+            fieldValidationErrors.userName = userNameValid ? '' : ' is invalid it has to contain only alphabets and minimum length must be greater than 1';
             
             break;
           case 'password':
